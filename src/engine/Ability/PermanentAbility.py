@@ -17,13 +17,19 @@ __all__ = ["attach_artifact", "equip", "fortify", "enchant",
            "this_card_is_indestructible"]
 
 def attach_artifact(cost, keyword, limit=no_limit):
-    if isinstance(cost, str): cost = ManaCost(cost)
+    if isinstance(cost, str):
+        coststr = ''.join(['{%s}'%c for c in cost])
+        cost = ManaCost(cost)
+    else:
+        coststr = str(cost)
+        if isinstance(cost, ManaCost):
+            coststr = ''.join(['{%s}'%c for c in coststr])
     def effects(controller, source):
         yield cost
         target = yield Target(source.target_type, player='you')
         source.attach(target)
         yield
-    return ActivatedAbility(effects, limit=limit+sorcery_limit, txt='%s %s'%(keyword, cost), keyword=keyword)
+    return ActivatedAbility(effects, limit=limit+sorcery_limit, txt='%s %s'%(keyword, coststr), keyword=keyword)
 
 equip = lambda cost, limit=no_limit: attach_artifact(cost, "Equip", limit)
 fortify = lambda cost, limit=no_limit: attach_artifact(cost, "Fortify", limit)
