@@ -139,7 +139,7 @@ class Card(anim.Animable):
         #glClearColor(1.,1.,1.,1.)
         
         glEnable(GL_BLEND)
-        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA)
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
         
         cmap = dict(zip(["White", "Blue", "Black", "Red", "Green"], "WUBRG"))
         cmap1 = dict(zip("WUBRG", range(5)))
@@ -199,34 +199,37 @@ class Card(anim.Animable):
         def blend(texture, width, height):
             tw, th = texture.width, texture.height
             
+            pt1, pt2 = 0.35, 0.65
             glEnable(texture.target)
             glBindTexture(texture.target, texture.id)
+            glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA)
             glBegin(GL_QUADS)
             glColor4f(1., 1., 1., 1.0)
-            glTexCoord2f(0.65*tw, 0)
-            glVertex3f(0.65*width, 0, 0)
+            glTexCoord2f(pt2*tw, 0)
+            glVertex3f(pt2*width, 0, 0)
             glTexCoord2f(tw, 0)
             glVertex3f(width, 0, 0)
             glTexCoord2f(tw, th)
             glVertex3f(width, height, 0)
-            glTexCoord2f(0.65*tw, th)
-            glVertex3f(0.65*width, height, 0)
+            glTexCoord2f(pt2*tw, th)
+            glVertex3f(pt2*width, height, 0)
 
-            glColor4f(0, 0, 0, 0)
-            glTexCoord2f(0.35*tw, 0)
-            glVertex3f(0.35*width, 0, 0)
+            glColor4f(0., 0., 0., 0)
+            glTexCoord2f(pt1*tw, 0)
+            glVertex3f(pt1*width, 0, 0)
             glColor4f(1., 1., 1., 1)
-            glTexCoord2f(0.65*tw, 0)
-            glVertex3f(0.65*width, 0, 0)
+            glTexCoord2f(pt2*tw, 0)
+            glVertex3f(pt2*width, 0, 0)
             glColor4f(1., 1., 1., 1)
-            glTexCoord2f(0.65*tw, th)
-            glVertex3f(0.65*width, height, 0)
-            glColor4f(0, 0, 0, 0)
-            glTexCoord2f(0.35*tw, th)
-            glVertex3f(0.35*width, height, 0)
+            glTexCoord2f(pt2*tw, th)
+            glVertex3f(pt2*width, height, 0)
+            glColor4f(0., 0., 0., 0)
+            glTexCoord2f(pt1*tw, th)
+            glVertex3f(pt1*width, height, 0)
 
             glEnd()
             glDisable(texture.target)
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
             glColor4f(1., 1., 1., 1.)
         
         if blend_color:
