@@ -492,14 +492,14 @@ class StatusController(object):
                 self.tmp_dx = 0
                 self.zone_view.focus_previous()
         return self.clicked
-    #def on_mouse_release(self, x, y, button, modifiers):
-    #    if self.clicked:
-    #        zone_view = self.zone_view
-    #        if len(zone_view.cards):
-    #            self.window.process_action(Action.CardSelected(zone_view.focused.gamecard))
-    #            if modifiers & key.MOD_CTRL: self.window.keep_priority()
-    #        zone_view.hide()
-    #        self.clicked = False
+    def on_mouse_release(self, x, y, button, modifiers):
+        if self.clicked:
+            zone_view = self.zone_view
+            if len(zone_view.cards):
+                self.window.process_action(Action.CardSelected(zone_view.focused.gamecard))
+                if modifiers & key.MOD_CTRL: self.window.keep_priority()
+            zone_view.hide()
+            self.clicked = False
     def on_mouse_press(self, x, y, button, modifiers):
         for status in [self.mainstatus, self.otherstatus]:
             value = status.handle_click(x, y)
