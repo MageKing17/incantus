@@ -97,7 +97,7 @@ class Player(MtGObject):
         # XXX This is a bit hacky - used by, ex Calciform Pools
         # Add X mana in any combination of W and/or U to your manapool
         if "(" in amount:
-            amount = self.make_selection([('Add {%s}'%col, col) for col in generate_hybrid_choices(amount)], 1, prompt="Choose mana to add")
+            amount = self.make_selection([('Add %s'%''.join(['{%s}'%c for c in col]), col) for col in generate_hybrid_choices(amount)], 1, prompt="Choose mana to add")
         self.manapool.add(amount)
     def shuffle(self):
         self.library.shuffle()
