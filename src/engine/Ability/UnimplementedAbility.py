@@ -106,3 +106,6 @@ def transfigure(n):
 
 def conspire():
     return CardStaticAbility(no_effects, keyword="conspire", zone="stack")
+
+def overload(cost):
+    return CardStaticAbility(no_effects, keyword="overload", zone="all")
