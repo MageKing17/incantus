@@ -95,3 +95,6 @@ def miracle(cost):
 
 def soulbond():
     return CardStaticAbility(no_effects, keyword="soulbond", zone="battlefield")
+
+def overload(cost):
+    return CardStaticAbility(no_effects, keyword="overload", zone="all")

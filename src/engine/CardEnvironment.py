@@ -46,6 +46,7 @@ from Ability.DissensionAbility import *
 from Ability.NemesisAbility import *
 from Ability.ConfluxAbility import *
 from Ability.InvasionAbility import *
+from Ability.ReturnToRavnicaAbility import *
 from Ability.UnimplementedAbility import *
 from Ability.WorldwakeAbility import *
 from Ability.TimeSpiralAbility import *
